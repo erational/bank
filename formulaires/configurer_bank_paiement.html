@@ -51,7 +51,7 @@
 				<option value=""></option>
 				<BOUCLE_prestas(POUR){tableau #REM|bank_lister_prestas}>
 					#SET{val,#VALEUR}
-					<option value="#GET{val}">[(#VAL{bank:label_presta_}|concat{#VALEUR}|_T|textebrut)]</option>
+					<option value="#GET{val}">[(#VAL{bank:label_presta_}|concat{#VALEUR}|_T|replace{'<a\[^>\]*>(.*)</a>',' | $1 '}|textebrut)]</option>
 				</BOUCLE_prestas>
 			</select>
 			<input type="submit" name="action_append" value="<:bouton_ajouter|attribut_html:>" style="float:right;" />
