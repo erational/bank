@@ -50,11 +50,11 @@ function payzen_url_serveur($config){
 		case "sogecommerce":
 			$host = "https://sogecommerce.societegenerale.eu";
 			break;
+		*/
 
 		case "scelliuspaiement":
 			$host = "https://scelliuspaiement.labanquepostale.fr";
 			break;
-		*/
 
 		case "payzen":
 		default:
@@ -201,7 +201,7 @@ function payzen_available_cards($config){
 		'AMEX' => "AMEX.gif",
 	);
 
-	if ($config['presta']=='systempay') {
+	if (in_array($config['presta'], ['systempay', 'scelliuspaiement'])) {
 		if ($config['service']=="osb"){
 			// pas de CB et e-CB avec OSB
 			unset($cartes_possibles['CB']);
@@ -215,7 +215,7 @@ function payzen_available_cards($config){
 		}
 	}
 
-	if (in_array($config['presta'], ['payzen', 'clicandpay'])){
+	if (in_array($config['presta'], ['payzen', 'clicandpay', 'scelliuspaiement'])){
 		// les SEPA, abo ou non
 		$cartes_possibles['SDD'] = "SEPA_SDD.gif";
 		if ($config['type']!=='abo'){
@@ -225,6 +225,7 @@ function payzen_available_cards($config){
 			$cartes_possibles['DINERS'] = "DINERS.gif";
 			$cartes_possibles['SOFORT_BANKING'] = "SOFORT.gif";
 			$cartes_possibles['IDEAL'] = "IDEAL.gif";
+			$cartes_possibles['BANCONTACT'] = "BANCONTACT.gif";
 
 			// et les e-cheques vacances
 			// $cartes_possibles['E_CV'] = "E_CV.gif";
